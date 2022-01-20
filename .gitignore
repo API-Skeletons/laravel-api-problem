@@ -2,3 +2,5 @@
 composer.lock
 /.idea/
 /.phpcs-cache
+/coverage/
+/.phpunit.cache/
