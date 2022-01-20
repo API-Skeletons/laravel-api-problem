@@ -1,0 +1,58 @@
+{
+    "name": "api-skeletons/laravel-api-problem",
+    "description": "API Problem for Laravel",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "api-problem",
+        "laravel",
+        "rest"
+    ],
+    "homepage": "https://apiskeletons.com",
+    "support": {
+        "docs": "https://github.com/api-skeletons/laravel-api-problem",
+        "issues": "https://github.com/api-skeletons/laravel-api-problem/issues",
+        "source": "https://github.com/api-skeletons/laravel-api-problem",
+        "chat": "https://gitter.im/API-Skeletons/open-source"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "ApiSkeletons\\Laravel\\ApiProblem\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ApiSkeletonsTest\\Laravel\\ApiProblem\\": "test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tom H Anderson",
+            "email": "tom.h.anderson@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ApiSkeletons\\Laravel\\ApiProblem\\ServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpcs && vendor/bin/phpunit && vendor/bin/psalm"
+    },
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^8.80"
+    },
+    "require-dev": {
+        "doctrine/coding-standard": "^9.0",
+        "doctrine/dbal": "^3.1.1",
+        "orchestra/testbench": "^6.23",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.15"
+    }
+}
