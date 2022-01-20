@@ -6,6 +6,9 @@ namespace ApiSkeletonsTest\Laravel\ApiProblem;
 
 use ApiSkeletons\Laravel\ApiProblem\ApiProblem;
 use ApiSkeletons\Laravel\ApiProblem\Exception;
+use ApiSkeletons\Laravel\ApiProblem\Facades\ApiProblem as ApiProblemFacade;
+use http\Exception\InvalidArgumentException;
+use Illuminate\Http\JsonResponse;
 use ReflectionObject;
 use TypeError;
 
@@ -25,6 +28,18 @@ final class ApiProblemTest extends TestCase
             '404' => [404],
             '500' => [500],
         ];
+    }
+
+    public function testResponseWithObject(): void
+    {
+        $apiProblem = new ApiProblem(500, 'Testing');
+
+        $this->assertInstanceOf(JsonResponse::class, $apiProblem->response());
+    }
+
+    public function testResponseWithFacade(): void
+    {
+        $this->assertInstanceOf(JsonResponse::class, ApiProblemFacade::response('Testing', 500));
     }
 
     /**
@@ -254,5 +269,53 @@ final class ApiProblemTest extends TestCase
         $e = new \Exception('Testing', $code);
         $problem = new ApiProblem($code, $e);
         $this->assertEquals(500, $problem->status);
+    }
+
+    /**
+     * @dataProvider statusCodes
+     * @group api-tools-118
+     */
+    public function testMagicGetInvalidArgument(int $code): void
+    {
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $apiProblem = new ApiProblem($code, 'Testing', null, null, ['more' => 'testing']);
+
+        $this->assertEquals('testing', $apiProblem->code);
+    }
+
+    /**
+     * @dataProvider statusCodes
+     * @group api-tools-118
+     */
+    public function testMagicGetNormalizedProperties(int $code): void
+    {
+        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['more' => 'testing']);
+
+        $this->assertEquals('test', $apiProblem->__get('type'));
+        $this->assertEquals($code, $apiProblem->__get('status'));
+        $this->assertEquals('title test', $apiProblem->__get('title'));
+        $this->assertEquals('Testing', $apiProblem->__get('detail'));
+    }
+
+    /**
+     * @dataProvider statusCodes
+     * @group api-tools-118
+     */
+    public function testMagicGetAdditionalDetails(int $code): void
+    {
+        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['xxmore' => 'testing']);
+
+        $this->assertEquals('testing', $apiProblem->__get('xxmore'));
+    }
+
+    /**
+     * @dataProvider statusCodes
+     * @group api-tools-118
+     */
+    public function testMagicGetAdditionalDetailsNormalized(int $code): void
+    {
+        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['code' => 'testing']);
+
+        $this->assertEquals('testing', $apiProblem->__get('code'));
     }
 }

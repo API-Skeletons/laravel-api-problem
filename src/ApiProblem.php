@@ -183,10 +183,6 @@ class ApiProblem
             return $this->{$prop};
         }
 
-        if (isset($this->additionalDetails[$name])) {
-            return $this->additionalDetails[$name];
-        }
-
         if (isset($this->additionalDetails[$normalized])) {
             return $this->additionalDetails[$normalized];
         }
@@ -221,7 +217,8 @@ class ApiProblem
      *
      * @param mixed[] $params
      */
-    public function response(array ...$params): JsonResponse
+    // phpcs:ignore SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+    public function response(...$params): JsonResponse
     {
         $apProblem = null;
 
@@ -314,11 +311,7 @@ class ApiProblem
             return get_class($this->detail);
         }
 
-        if ($this->title === null) {
-            return 'Unknown';
-        }
-
-        return $this->title;
+        return 'Unknown';
     }
 
     /**
