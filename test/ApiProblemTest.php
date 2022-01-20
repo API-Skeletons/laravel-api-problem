@@ -303,9 +303,9 @@ final class ApiProblemTest extends TestCase
      */
     public function testMagicGetAdditionalDetails(int $code): void
     {
-        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['xxmore' => 'testing']);
+        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['MixedCase' => 'testing']);
 
-        $this->assertEquals('testing', $apiProblem->__get('xxmore'));
+        $this->assertEquals('testing', $apiProblem->__get('MixedCase'));
     }
 
     /**
@@ -314,8 +314,8 @@ final class ApiProblemTest extends TestCase
      */
     public function testMagicGetAdditionalDetailsNormalized(int $code): void
     {
-        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['code' => 'testing']);
+        $apiProblem = new ApiProblem($code, 'Testing', 'test', 'title test', ['xxcode' => 'testing']);
 
-        $this->assertEquals('testing', $apiProblem->__get('code'));
+        $this->assertEquals('testing', $apiProblem->__get('xxcode'));
     }
 }

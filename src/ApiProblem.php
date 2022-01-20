@@ -187,6 +187,10 @@ class ApiProblem
             return $this->additionalDetails[$normalized];
         }
 
+        if (isset($this->additionalDetails[$name])) {
+            return $this->additionalDetails[$name];
+        }
+
         throw new InvalidArgumentException(sprintf(
             'Invalid property name "%s"',
             $name
