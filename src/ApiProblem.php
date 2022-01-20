@@ -7,6 +7,7 @@ namespace ApiSkeletons\Laravel\ApiProblem;
 use ApiSkeletons\Laravel\ApiProblem\Exception\InvalidArgumentException;
 use ApiSkeletons\Laravel\ApiProblem\Exception\ProblemExceptionInterface;
 use Exception;
+use Illuminate\Http\Response;
 use Throwable;
 
 use function array_key_exists;
@@ -17,6 +18,7 @@ use function count;
 use function get_class;
 use function in_array;
 use function is_numeric;
+use function response;
 use function sprintf;
 use function strtolower;
 use function trim;
@@ -211,6 +213,16 @@ class ApiProblem
 
         // Required fields should always overwrite additional fields
         return array_merge($this->additionalDetails, $problem);
+    }
+
+    /**
+     * Compose a response and return it.
+     */
+    public function response(): Response
+    {
+        return response()
+            ->setStatusCode($this->getStatus())
+            ->setContent($this->toArray());
     }
 
     /**
