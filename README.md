@@ -100,7 +100,7 @@ try {
         'title' => 'required|unique:posts|max:255',
         'body' => 'required',
     ]);
-} catch (\Illuminate\Validation\ValidationException $e) {
+} catch (ValidationException $e) {
     return ApiProblem::response($e->getMessage(), 422, null, null, ['errors' => $e->errors()]);
 }
 ```
