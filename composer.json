@@ -1,6 +1,6 @@
 {
     "name": "api-skeletons/laravel-api-problem",
-    "description": "API Problem for Laravel",
+    "description": "Problem Details for HTTP APIs for Laravel",
     "type": "library",
     "license": "BSD-3-Clause",
     "keywords": [
