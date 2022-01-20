@@ -221,9 +221,22 @@ class ApiProblem
      *
      * @param string[] $additional
      */
-    public function response(string|Throwable $detail, int|string $status, ?string $type = null, ?string $title = null, array $additional = []): JsonResponse
+    public function response(...$params)
+//    public function response(string|Throwable $detail, int|string $status, ?string $type = null, ?string $title = null, array $additional = []): JsonResponse
     {
-        $apiProblem = new ApiProblem($status, $detail, $type, $title, $additional);
+        $apProblem = null;
+
+        print_r($params);die();
+
+        if ($this->getStatus()) {
+            // Use current object
+            $apProblem = $this;
+        } else {
+            // Called from a Facade, use local object
+            $apiProblem = new ApiProblem();
+        }
+
+        $apiProblem = ($this->getStatus()) ? $this : new ApiProblem($status, $detail, $type, $title, $additional);
 
         return response()
             ->json($apiProblem->toArray(), $apiProblem->getStatus())
