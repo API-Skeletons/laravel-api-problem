@@ -226,17 +226,19 @@ class ApiProblem
     {
         $apProblem = null;
 
-        print_r($params);die();
-
         if ($this->getStatus()) {
             // Use current object
             $apProblem = $this;
         } else {
-            // Called from a Facade, use local object
-            $apiProblem = new ApiProblem();
-        }
+            $status = $params[2] ?? null;
+            $detail = $params[1] ?? null;
+            $type = $params[3] ?? null;
+            $title = $params[4] ?? null;
+            $additional = $params[5] ?? null;
 
-        $apiProblem = ($this->getStatus()) ? $this : new ApiProblem($status, $detail, $type, $title, $additional);
+            // Called from a Facade, use local object
+            $apiProblem = new ApiProblem($status, $detail, $type, $title, $additional);
+        }
 
         return response()
             ->json($apiProblem->toArray(), $apiProblem->getStatus())
