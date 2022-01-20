@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ApiSkeletons\Laravel\ApiProblem;
 
+use Doctrine\Instantiator\Instantiator;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 class ServiceProvider extends LaravelServiceProvider
@@ -20,5 +21,8 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function boot(): void
     {
+        $this->app->bind('ApiProblem', static function () {
+            return (new Instantiator())->instantiate(ApiProblem::class);
+        });
     }
 }

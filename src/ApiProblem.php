@@ -217,8 +217,9 @@ class ApiProblem
 
     /**
      * Compose a response and return it.
-     *
      * The first two parameters are reversed to match Laravel response() params
+     *
+     * @param string[] $additional
      */
     public function response(string|Throwable $detail, int|string $status, ?string $type = null, ?string $title = null, array $additional = []): JsonResponse
     {
