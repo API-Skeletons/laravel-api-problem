@@ -107,7 +107,7 @@ try {
 
 results in:
 
-```php
+```json
 {
     "errors":{
         "title":[
