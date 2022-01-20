@@ -13,7 +13,7 @@ interface ProblemExceptionInterface
 {
     public function getAdditionalDetails(): array|Traversable|null;
 
-    public function getType(): string;
+    public function getType(): ?string;
 
-    public function getTitle(): string;
+    public function getTitle(): ?string;
 }

@@ -219,10 +219,9 @@ class ApiProblem
      * Compose a response and return it.
      * The first two parameters are reversed to match Laravel response() params
      *
-     * @param string[] $additional
+     * @param mixed[] $params
      */
-    public function response(...$params)
-//    public function response(string|Throwable $detail, int|string $status, ?string $type = null, ?string $title = null, array $additional = []): JsonResponse
+    public function response(array ...$params): JsonResponse
     {
         $apProblem = null;
 
@@ -230,10 +229,10 @@ class ApiProblem
             // Use current object
             $apiProblem = $this;
         } else {
-            $status = $params[1] ?? null;
-            $detail = $params[0] ?? null;
-            $type = $params[2] ?? null;
-            $title = $params[3] ?? null;
+            $status     = $params[1] ?? null;
+            $detail     = $params[0] ?? null;
+            $type       = $params[2] ?? null;
+            $title      = $params[3] ?? null;
             $additional = $params[4] ?? [];
 
             // Called from a Facade, use local object
