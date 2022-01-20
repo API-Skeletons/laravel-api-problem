@@ -7,7 +7,7 @@ namespace ApiSkeletons\Laravel\ApiProblem;
 use ApiSkeletons\Laravel\ApiProblem\Exception\InvalidArgumentException;
 use ApiSkeletons\Laravel\ApiProblem\Exception\ProblemExceptionInterface;
 use Exception;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 use function array_key_exists;
@@ -48,7 +48,7 @@ class ApiProblem
     /**
      * Description of the specific problem.
      */
-    protected string|Throwable|Throwable $detail = '';
+    protected string|Throwable $detail = '';
 
     /**
      * Whether or not to include a stack trace and previous
@@ -123,7 +123,7 @@ class ApiProblem
     /**
      * Title of the error.
      */
-    protected string $title;
+    protected ?string $title;
 
     /**
      * Create an instance using the provided information. If nothing is
@@ -133,7 +133,7 @@ class ApiProblem
      *
      * @param string[] $additional
      */
-    public function __construct(int|string $status, string|Throwable|Throwable $detail, ?string $type = null, ?string $title = null, array $additional = [])
+    public function __construct(int|string $status, string|Throwable $detail, ?string $type = null, ?string $title = null, array $additional = [])
     {
         if ($detail instanceof ProblemExceptionInterface) {
             if ($type === null) {
@@ -218,11 +218,12 @@ class ApiProblem
     /**
      * Compose a response and return it.
      */
-    public function response(): Response
+    public function response(): JsonResponse
     {
         return response()
-            ->setStatusCode($this->getStatus())
-            ->setContent($this->toArray());
+            ->json($this->toArray(), $this->getStatus())
+            ->header('Content-Type', 'application/problem+json');
+
     }
 
     /**
