@@ -22,7 +22,7 @@ composer require api-skeletons/laravel-api-problem
 ```php
 use ApiSkeletons\Laravel\ApiProblem\Facades\ApiProblem;
 
-return ApiProblem::response(401, 'Detailed Unauthorized Message');
+return ApiProblem::response('Detailed Unauthorized Message', 401);
 ```
 
 ## Attribution
