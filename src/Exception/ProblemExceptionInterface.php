@@ -11,18 +11,9 @@ use Traversable;
  */
 interface ProblemExceptionInterface
 {
-    /**
-     * @return null|array|Traversable
-     */
-    public function getAdditionalDetails();
+    public function getAdditionalDetails(): array|Traversable|null;
 
-    /**
-     * @return string
-     */
-    public function getType();
+    public function getType(): string;
 
-    /**
-     * @return string
-     */
-    public function getTitle();
+    public function getTitle(): string;
 }
