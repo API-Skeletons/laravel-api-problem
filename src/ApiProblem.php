@@ -228,7 +228,7 @@ class ApiProblem
 
         if ($this->getStatus()) {
             // Use current object
-            $apProblem = $this;
+            $apiProblem = $this;
         } else {
             $status = $params[1] ?? null;
             $detail = $params[0] ?? null;
