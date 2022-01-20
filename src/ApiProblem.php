@@ -59,7 +59,7 @@ class ApiProblem
     /**
      * HTTP status for the error.
      */
-    protected int $status;
+    protected ?int $status = null;
 
     /**
      * Normalized property names for overloading.
@@ -230,11 +230,11 @@ class ApiProblem
             // Use current object
             $apProblem = $this;
         } else {
-            $status = $params[2] ?? null;
-            $detail = $params[1] ?? null;
-            $type = $params[3] ?? null;
-            $title = $params[4] ?? null;
-            $additional = $params[5] ?? null;
+            $status = $params[1] ?? null;
+            $detail = $params[0] ?? null;
+            $type = $params[2] ?? null;
+            $title = $params[3] ?? null;
+            $additional = $params[4] ?? [];
 
             // Called from a Facade, use local object
             $apiProblem = new ApiProblem($status, $detail, $type, $title, $additional);
@@ -277,7 +277,7 @@ class ApiProblem
      * If an exception was provided, creates the status code from it;
      * otherwise, code as provided is used.
      */
-    protected function getStatus(): int
+    protected function getStatus(): ?int
     {
         if ($this->detail instanceof Throwable || $this->detail instanceof Exception) {
             $this->status = (int) $this->createStatusFromException();
