@@ -217,13 +217,16 @@ class ApiProblem
 
     /**
      * Compose a response and return it.
+     *
+     * The first two parameters are reversed to match Laravel response() params
      */
-    public function response(): JsonResponse
+    public function response(string|Throwable $detail, int|string $status, ?string $type = null, ?string $title = null, array $additional = []): JsonResponse
     {
-        return response()
-            ->json($this->toArray(), $this->getStatus())
-            ->header('Content-Type', 'application/problem+json');
+        $apiProblem = new ApiProblem($status, $detail, $type, $title, $additional);
 
+        return response()
+            ->json($apiProblem->toArray(), $apiProblem->getStatus())
+            ->header('Content-Type', 'application/problem+json');
     }
 
     /**
