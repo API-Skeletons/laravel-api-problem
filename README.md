@@ -105,6 +105,25 @@ try {
 }
 ```
 
+results in:
+
+```php
+{
+    "errors":{
+        "title":[
+            "The title field is required."
+        ],
+        "body":[
+            "The body field is required."
+        ]
+    },
+    "type": "http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html",
+    "title": "Unprocessable Entity",
+    "status": 422,
+    "detail": "The given data was invalid."
+}
+```
+
 ## Attribution
 
 The bulk of this repository was copied from Laminas API Tools.  I wanted to provide a
