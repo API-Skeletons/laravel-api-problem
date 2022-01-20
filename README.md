@@ -50,7 +50,13 @@ return a response quickly and directly as shown in the Quick Start.  When using
 the facade the arguments to the `response()` method are:
 
 ```php
-    response(string|Throwable $detail, int|string $status, ?string $type = null, ?string $title = null, array $additional = [])
+response(
+    string|Throwable $detail, 
+    int|string $status, 
+    ?string $type = null, 
+    ?string $title = null, 
+    array $additional = []
+)
 ```
 
 ### Creating an object
@@ -62,7 +68,13 @@ and the `response()` function is modified to match the standard
 format.
 
 ```php
-__construct(int|string $status, string|Throwable $detail, ?string $type = null, ?string $title = null, array $additional = [])
+__construct(
+    int|string $status, 
+    string|Throwable $detail, 
+    ?string $type = null, 
+    ?string $title = null, 
+    array $additional = []
+)
 ```
 
 An example of creating an object directly:
