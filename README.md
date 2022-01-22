@@ -124,6 +124,28 @@ results in:
 }
 ```
 
+## Use with the Exception Handler
+
+```php
+namespace App\Exceptions;
+
+use ApiSkeletons\Laravel\ApiProblem\Facades\ApiProblem;
+use Doctrine\ORM\EntityNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+
+class Handler extends ExceptionHandler
+{
+    public function register(): void
+    {
+        $this->renderable(function (EntityNotFoundException $e, Request $request) {
+            return ApiProblem::response($e->getMessage(), 404);
+        });
+    }
+}
+
+```
+
 ## Attribution
 
 The bulk of this repository was copied from Laminas API Tools.  I wanted to provide a
