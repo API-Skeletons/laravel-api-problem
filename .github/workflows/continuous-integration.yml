@@ -19,18 +19,19 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "8.0"
           - "8.1"
+          - "8.2"
+          - "8.3"
         dependencies:
           - "highest"
         optional-dependencies:
           - true
           - false
         include:
-          -   php-version: "8.0"
+          -   php-version: "8.1"
               dependencies: "lowest"
               optional-dependencies: false
-          -   php-version: "8.0"
+          -   php-version: "8.1"
               dependencies: "lowest"
               optional-dependencies: true
 

@@ -59,7 +59,7 @@ class ApiProblem
     /**
      * HTTP status for the error.
      */
-    protected ?int $status = null;
+    protected int|null $status = null;
 
     /**
      * Normalized property names for overloading.
@@ -123,7 +123,7 @@ class ApiProblem
     /**
      * Title of the error.
      */
-    protected ?string $title;
+    protected string|null $title;
 
     /**
      * Create an instance using the provided information. If nothing is
@@ -133,7 +133,7 @@ class ApiProblem
      *
      * @param string[] $additional
      */
-    public function __construct(int|string $status, string|Throwable $detail, ?string $type = null, ?string $title = null, array $additional = [])
+    public function __construct(int|string $status, string|Throwable $detail, string|null $type = null, string|null $title = null, array $additional = [])
     {
         if ($detail instanceof ProblemExceptionInterface) {
             if ($type === null) {
@@ -193,7 +193,7 @@ class ApiProblem
 
         throw new InvalidArgumentException(sprintf(
             'Invalid property name "%s"',
-            $name
+            $name,
         ));
     }
 
@@ -277,7 +277,7 @@ class ApiProblem
      * If an exception was provided, creates the status code from it;
      * otherwise, code as provided is used.
      */
-    protected function getStatus(): ?int
+    protected function getStatus(): int|null
     {
         if ($this->detail instanceof Throwable || $this->detail instanceof Exception) {
             $this->status = (int) $this->createStatusFromException();
