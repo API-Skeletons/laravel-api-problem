@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/API-Skeletons/laravel-api-problem/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/API-Skeletons/laravel-api-problem/actions/workflows/continuous-integration.yml?query=branch%3Amain)
 [![Code Coverage](https://codecov.io/gh/API-Skeletons/laravel-api-problem/branch/main/graphs/badge.svg)](https://codecov.io/gh/API-Skeletons/laravel-api-problem/branch/main)
-[![PHP Version](https://img.shields.io/badge/PHP-8.0%2b-blue)](https://img.shields.io/badge/PHP-8.0%2b-blue)
+[![PHP Version](https://img.shields.io/badge/PHP-8.1%2b-blue)](https://img.shields.io/badge/PHP-8.1%2b-blue)
 [![Total Downloads](https://poser.pugx.org/api-skeletons/laravel-api-problem/downloads)](//packagist.org/packages/api-skeletons/laravel-api-problem)
 [![License](https://poser.pugx.org/api-skeletons/laravel-api-problem/license)](//packagist.org/packages/api-skeletons/laravel-api-problem)
 

@@ -10,16 +10,14 @@ class DomainException extends \DomainException implements
     ExceptionInterface,
     ProblemExceptionInterface
 {
-    protected ?string $type = null;
+    protected string|null $type = null;
 
     /** @var string[] */
     protected array $details = [];
 
-    protected ?string $title = null;
+    protected string|null $title = null;
 
-    /**
-     * @param string[] $details
-     */
+    /** @param string[] $details */
     public function setAdditionalDetails(array $details): self
     {
         $this->details = $details;
@@ -46,12 +44,12 @@ class DomainException extends \DomainException implements
         return $this->details;
     }
 
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string|null
     {
         return $this->title;
     }
